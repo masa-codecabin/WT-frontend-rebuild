@@ -8,7 +8,7 @@ import {
 import { AxiosResponse, AxiosError } from 'axios'
 
 export const login = async (email: string, password: string) => {
-  return await Client.post<User>('/auth/sign_in', { email, password })
+  return await Client.post<User>('api/v1/auth/sign_in', { email, password })
     .then((res: AxiosResponse<User>) => {
       setAuthDataFromResponse(res.headers)
       return res
@@ -19,7 +19,7 @@ export const login = async (email: string, password: string) => {
 }
 
 export const logout = async () => {
-  return await Client.delete('/auth/sign_out', { headers: getAuthDataFromStorage() })
+  return await Client.delete('api/v1/auth/sign_out', { headers: getAuthDataFromStorage() })
     .then(() => {
       removeAuthDataFromStorage()
     })
