@@ -8,7 +8,7 @@
     <h2
       class="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-left xl:text-5xl xl:text-bold"
     >
-      Log in
+      Sign up
     </h2>
     <div class="mt-12">
       <div class="mt-8">
@@ -38,22 +38,22 @@
       <div class="mt-10">
         <button
           class="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg"
-          @click="handleLogin"
+          @click="handleSignup"
         >
-          Log In
+          Sign up
         </button>
       </div>
     </div>
     <p>
       Do you have an account?
-      <router-link to="/signup"><h3>sign up here</h3></router-link>
+      <router-link to="/"><h3>Login here</h3></router-link>
     </p>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
-import { login } from "@/api/auth";
+import { signup } from "@/api/auth";
 import router from "@/router";
 
 export default defineComponent({
@@ -66,8 +66,8 @@ export default defineComponent({
 
     return {
       ...toRefs(formData),
-      handleLogin: async () => {
-        await login(formData.email, formData.password)
+      handleSignup: async () => {
+        await signup(formData.email, formData.password)
           .then((res) => {
             if (res?.status === 200) {
               router.push("/home");
@@ -76,7 +76,7 @@ export default defineComponent({
             }
           })
           .catch(() => {
-            alert("Login failed");
+            alert("signup failed");
           });
       },
     };

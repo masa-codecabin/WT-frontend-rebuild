@@ -18,6 +18,17 @@ export const login = async (email: string, password: string) => {
     })
 }
 
+export const signup = async (email: string, password: string) => {
+  return await Client.post<User>('api/v1/auth', { email, password })
+    .then((res: AxiosResponse<User>) => {
+      setAuthDataFromResponse(res.headers)
+      return res
+    })
+    .catch((err: AxiosError) => {
+      return err.response
+    })
+}
+
 export const logout = async () => {
   return await Client.delete('api/v1/auth/sign_out', { headers: getAuthDataFromStorage() })
     .then(() => {
