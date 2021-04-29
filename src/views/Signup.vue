@@ -70,7 +70,7 @@ export default defineComponent({
         await signup(formData.email, formData.password)
           .then((res) => {
             if (res?.status === 200) {
-              router.push("/home");
+              router.push("/home/" + res.data.data.id);
             } else {
               alert("Your email address or password is incorrect");
             }

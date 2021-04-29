@@ -1,4 +1,7 @@
 <template>
+  <section v-for="user in users" :key="user.id">
+    <h3>{{ user.email }}</h3>
+  </section>
   <div class="mt-16 px-16 mx-auto xl:max-w-3xl">
     <div class="mt-10">
       <button
@@ -15,6 +18,7 @@
 import { defineComponent } from "vue";
 import { logout } from "@/api/auth";
 import router from "@/router";
+import axios from "axios";
 
 export default defineComponent({
   name: "Home",
@@ -27,6 +31,20 @@ export default defineComponent({
     return {
       handleLogout,
     };
+  },
+
+  data() {
+    return {
+      users: [],
+      user_id: this.$route.params.user_id,
+    };
+  },
+  mounted() {
+    let uid = localStorage.getItem("uid");
+
+    axios
+      .get(`http://localhost:3000/api/v1/users/${this.user_id}.json`)
+      .then((response) => (this.users = response.data));
   },
 });
 </script>

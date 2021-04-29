@@ -5,7 +5,7 @@ import Signup from '@/views/Signup.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/home',
+    path: '/home/:user_id',
     name: 'Home',
     component: Home
   },
